@@ -16,15 +16,29 @@ let index = (req, res) => {
         res.end();
     }
 };
-
 let about = (req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.write('<h1>About</h1>');
+    res.write('<h1>about</h1>');
     res.end();
 };
 
+//Get: /Hello/Zabi
+let hello = (req, res) => {
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.write(`<h1>Hello ${req.params.name}</h1>`);
+    res.end();
+};
+
+let redirect = (req, res) => {
+
+    res.redirect('/');
+}
+
 // load pages
+//: indicates a param value not a hard-coded part of a url ruqest
 app.use('/about', about);
+app.use('/hello/:name', hello);
+app.use('redirect', redirect);
 app.use('/', index);
 
 // start express server
